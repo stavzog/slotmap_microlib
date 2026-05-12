@@ -1,5 +1,8 @@
 # slotmap_microlib
 
+[![Crates.io](https://img.shields.io/crates/v/slotmap_microlib.svg)](https://crates.io/crates/slotmap_microlib)
+
+
 A high-performance, decoupled slot manager designed for Data-Oriented Design (DOD). It provides stable 64-bit handles to data stored in packed, contiguous arrays.
 
 The slot manager is meant to work with a slot map. A slot map is a data structure that combines the memory efficiency of a `Vec` with the stable referencing of a `HashMap`. It maintains data in a perfectly packed "dense" array to leverage CPU cache prefetching while providing stable "handles" that do not break when elements are moved or deleted.
