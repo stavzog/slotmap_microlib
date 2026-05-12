@@ -1,0 +1,27 @@
+[package]
+name = "slotmap_microlib"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85.0"  # Minimum Rust version required
+authors = ["Stavros Zografos <stavzog@gmail.com>"]
+license = "MIT OR Apache-2.0"
+description = "A micro library for slot map data structure"
+homepage = "https://github.com/stavzog/slotmap_microlib"
+repository = "https://github.com/stavzog/slotmap_microlib"
+readme = "README.md"
+keywords = ["slot", "map", "data", "structure", "micro", "library"]
+categories = ["data-structures", "no-std"]
+exclude = [
+    ".github/",
+    "tests/fixtures/",
+    "*.log",
+]
+
+
+[dependencies]
+
+
+# Configure docs.rs to show all features
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
