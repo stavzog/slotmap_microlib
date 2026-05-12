@@ -9,7 +9,7 @@ description = "A micro library for slot map data structure"
 homepage = "https://github.com/stavzog/slotmap_microlib"
 repository = "https://github.com/stavzog/slotmap_microlib"
 readme = "README.md"
-keywords = ["slot", "map", "data", "structure", "micro", "library"]
+keywords = ["slot", "map", "micro", "library"]
 categories = ["data-structures", "no-std"]
 exclude = [
     ".github/",
