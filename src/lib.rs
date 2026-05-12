@@ -3,6 +3,29 @@
 //! A high-performance, decoupled slot manager designed for Data-Oriented Design (DOD).
 //! It provides stable 64-bit handles to data stored in packed, contiguous arrays.
 //!
+//! ## Quick Example
+//!
+//! ```rust
+//! use slotmap_microlib::{SlotManager, Handle};
+//!
+//! let mut manager = SlotManager::new(10);
+//! let mut data = Vec::new();
+//!
+//! // the manager provides the index for adding data
+//! let h1 = manager.add(|idx| data.push("Entity A"));
+//!
+//! // resolve handle to current index
+//! if let Some(idx) = manager.get(h1) {
+//!     assert_eq!(data[idx], "Entity A");
+//! }
+//!
+//! // synchronize your array via swap-and-pop when removing
+//! manager.remove(h1, |last_idx, to_rem_idx| {
+//!     data.swap(to_rem_idx, last_idx);
+//!     data.pop();
+//! });
+//! ```
+//!
 //! ## What is a Slot Map?
 //!
 //! A Slot Map is a data structure that provides the benefits of both a `Vec` and a `HashMap`.
@@ -29,28 +52,6 @@
 //! 2. **Structure of Arrays (SoA):** When you want to keep parallel arrays (e.g., `positions`, `velocities`) synchronized with a single manager.
 //! 3. **Stable References:** When external systems (like a scripting engine or UI) need to hold pointers to entities that are frequently added and removed.
 //!
-//! ## Quick Example
-//!
-//! ```rust
-//! use slotmap_microlib::{SlotManager, Handle};
-//!
-//! let mut manager = SlotManager::new(10);
-//! let mut data = Vec::new();
-//!
-//! // 1. Add data - the manager provides the index
-//! let h1 = manager.add(|idx| data.push("Entity A"));
-//!
-//! // 2. Lookup - resolve handle to current index
-//! if let Some(idx) = manager.get(h1) {
-//!     assert_eq!(data[idx], "Entity A");
-//! }
-//!
-//! // 3. Remove - synchronize your array via swap-and-pop
-//! manager.remove(h1, |last_idx, to_rem_idx| {
-//!     data.swap(to_rem_idx, last_idx);
-//!     data.pop();
-//! });
-//! ```
 //!
 //! ## Wrapper Pattern
 //!
